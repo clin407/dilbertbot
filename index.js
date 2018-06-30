@@ -26,7 +26,7 @@ function getSlackOptions() {
   return {
     channel: channel,
     icon_url: iconUrl,
-    text: [comicUrl, (getFormattedDate(new Date())].join(''),
+    text: [comicUrl, getFormattedDate(new Date())].join(''),
     unfurl_links: unfurlLinks,
     username: username
   };
