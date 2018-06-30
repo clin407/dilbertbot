@@ -1,6 +1,16 @@
 var schedule = require('node-schedule'),
     slackNotify = require('slack-notify');
+function getFormattedDate(date) {
+  var year = date.getFullYear();
 
+  var month = (1 + date.getMonth()).toString();
+  month = month.length > 1 ? month : '0' + month;
+
+  var day = date.getDate().toString();
+  day = day.length > 1 ? day : '0' + day;
+  
+  return year + '/' + month + '/' + day + '/';
+}
 /**
  * @name getSlackOptions
  * @description Returns options that are necessary to send a Slack message
@@ -8,16 +18,15 @@ var schedule = require('node-schedule'),
  * @returns {Object} Options to send a Slack message
  */
 function getSlackOptions() {
-  var channel = 'dilbert',
-      comicUrl = 'http://dilbert.com/',
-      iconUrl = 'http://i.imgur.com/lHQJDMj.png',
+  var channel = 'general',
+      comicUrl = 'https://www.gocomics.com/calvinandhobbes/',
       unfurlLinks = true,
-      username = 'Dilbert';
+      username = 'CalvinAndHobbes';
 
   return {
     channel: channel,
     icon_url: iconUrl,
-    text: [comicUrl, (new Date()).toISOString().substring(0, 10)].join(''),
+    text: [comicUrl, (getFormattedDate(new Date())].join(''),
     unfurl_links: unfurlLinks,
     username: username
   };
